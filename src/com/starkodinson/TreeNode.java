@@ -6,7 +6,7 @@ import java.util.*;
 
 public class TreeNode<T>
 {
-    private T data;
+    protected T data;
     private TreeNode<T> parent;
     private Set<TreeNode<T>> children;
     private TreeNode<T> masterRoot;

@@ -1,35 +1,26 @@
 package com.starkodinson;
 
-import com.sun.source.tree.Tree;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        TreeNode<String> cdr = new TreeNode<String>("C Drive");
-        TreeNode<String> prgms = new TreeNode<>("Programs", cdr);
-        TreeNode<String> wndws = new TreeNode<>("Windows", cdr);
-        TreeNode<String> bj = new TreeNode<>("BlueJ", prgms);
-        TreeNode<String> grnft = new TreeNode<>("Greenfoot", prgms);
-        TreeNode<String> fnts = new TreeNode<>("Fonts", wndws);
-        TreeNode<String> sys32 = new TreeNode<>("System32", wndws);
+        // write your code here
+        int[] data = {3, 7, 3, 4, 32, 5, 64, 34, 2, 12, 5, 6, 23, 43, 62, 56, 54};
+        List<TreeNode<Integer>> heap = new LinkedList<>();
 
-        System.out.println("Pre Order: " + TreeNode.preOrderTraversal(cdr));
-        System.out.println("In Order: " + TreeNode.inOrderTraversal(cdr));
-        System.out.println("Post Order: " + TreeNode.postOrderTraversal(cdr) + "\n\n");
-
-        TreeNode<String> usrs = new TreeNode<>("Users", cdr);
-        TreeNode<String> hmn = new TreeNode<>("Human", usrs);
-        TreeNode<String> mrtn = new TreeNode<>("Martian Manhunter", usrs);
-        TreeNode<String> guest = new TreeNode<>("Guests", usrs);
-
-        try
+        for (int i = 0; i < data.length; i++)
         {
-            System.out.println("In Order Non-Binary: " + TreeNode.inOrderTraversal(cdr));
+            if (i == 0) { heap.add(new TreeNode<Integer>(data[i])); }
+            else
+            {
+                TreeNode<Integer> p = heap.get((i - 1)/ 2);
+                TreeNode<Integer> c = new TreeNode(data[i], p);
+                heap.add(c);
+            }
         }
-        catch (IllegalArgumentException iae)
-        {
-            System.out.println("Error: " + iae);
-        }
+
+        System.out.println("RANDOM: " + heap);
+
     }
 }
