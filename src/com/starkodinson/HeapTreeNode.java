@@ -22,7 +22,7 @@ public class HeapTreeNode extends TreeNode {
     private static int leftChildIndex(int i) { return i * 2 + 1; }
     private static int rightChildIndex(int i) { return i * 2 + 2; }
 
-    private static int largestChildIndex(List<HeapTreeNode> heap, int i) throws NotIntegerTypeHeapException {
+    private static int largestChildIndex(List<HeapTreeNode> heap, int i) {
         int lci = leftChildIndex(i);
         int rci = rightChildIndex(i);
 
@@ -61,17 +61,25 @@ public class HeapTreeNode extends TreeNode {
         return heap;
     }
 
-    public static <T> void buildMaxHeap(List<HeapTreeNode> heap)
-    {
-
+    public static void buildMaxHeap(List<HeapTreeNode> heap) {
+        for (int i = 0; i < heap.size() - 1; i++)
+        {
+            siftDown(heap, i);
+        }
     }
 
-    public static void siftDown(List<HeapTreeNode> heap, int index) throws NotIntegerTypeHeapException
+    public static void siftDown(List<HeapTreeNode> heap, int index, int c)
     {
         int greatestChildIndex = largestChildIndex(heap, index);
+        if (greatestChildIndex == -1) { return; }
+        swap(heap, greatestChildIndex, index);
+        siftDown(heap, greatestChildIndex);
     }
-}
 
-class NotIntegerTypeHeapException extends Exception {
-    public NotIntegerTypeHeapException(String msg) { super(msg); }
+    private static void swap(List<HeapTreeNode> heap, int t, int i)
+    {
+        int temp = heap.get(i).getData();
+        heap.get(i).setData(heap.get(t).getData());
+        heap.get(t).setData(temp);
+    }
 }
