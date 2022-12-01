@@ -2,32 +2,37 @@ package com.starkodinson;
 
 import java.util.*;
 
-public class HeapTreeNode extends TreeNode {
-    protected int data;
+public class HeapTreeNode {
+    protected Integer data;
 
     public HeapTreeNode(int data) {
-        super(data);
         this.data = data;
     }
 
     public HeapTreeNode(int data, HeapTreeNode parent) {
-        super(data, parent);
         this.data = data;
     }
 
-    @Override
     public Integer getData() { return this.data; }
+
+    @Override
+    public String toString() { return data.toString(); }
+
+    public void setData(int data)
+    {
+        this.data = data;
+    }
 
     private static int parentIndex(int i) { return (i - 1) / 2; }
     private static int leftChildIndex(int i) { return i * 2 + 1; }
     private static int rightChildIndex(int i) { return i * 2 + 2; }
 
-    private static int largestChildIndex(List<HeapTreeNode> heap, int i) {
+    private static int largestChildIndex(List<HeapTreeNode> heap, int i, int c) {
         int lci = leftChildIndex(i);
         int rci = rightChildIndex(i);
 
-        if (lci >= heap.size()) { return -1; }
-        else if (rci > heap.size()) { return heap.get(lci).getData() > heap.get(i).getData() ? lci : -1; }
+        if (lci >= c) { return -1; }
+        else if (rci >= c) { return heap.get(lci).getData() > heap.get(i).getData() ? lci : -1; }
 
 
         if (heap.get(rci).getData() > heap.get(lci).getData())
@@ -42,6 +47,10 @@ public class HeapTreeNode extends TreeNode {
         return -1;
     }
 
+    public static void heapSort(List<HeapTreeNode> heap)
+    {
+        int considered = heap.size();
+    }
 
     public static List<HeapTreeNode> buildHeap(int[] arr)
     {
@@ -62,18 +71,18 @@ public class HeapTreeNode extends TreeNode {
     }
 
     public static void buildMaxHeap(List<HeapTreeNode> heap) {
-        for (int i = 0; i < heap.size() - 1; i++)
+        for (int i = heap.size() - 1; i >=0; i--)
         {
-            siftDown(heap, i);
+            siftDownMax(heap, i, heap.size());
         }
     }
 
-    public static void siftDown(List<HeapTreeNode> heap, int index, int c)
+    public static void siftDownMax(List<HeapTreeNode> heap, int index, int c)
     {
-        int greatestChildIndex = largestChildIndex(heap, index);
+        int greatestChildIndex = largestChildIndex(heap, index, c);
         if (greatestChildIndex == -1) { return; }
         swap(heap, greatestChildIndex, index);
-        siftDown(heap, greatestChildIndex);
+        siftDownMax(heap, greatestChildIndex, c);
     }
 
     private static void swap(List<HeapTreeNode> heap, int t, int i)

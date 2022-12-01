@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        int[] data = {3, 7, 3, 4, 32, 5, 64, 34, 2, 12, 5, 6, 23, 43, 62, 56, 54};
+        int[] data = {2, 4, 1, 5, 3, 6, 7};
         List<HeapTreeNode> heap = new LinkedList<>();
 
         for (int i = 0; i < data.length; i++)
