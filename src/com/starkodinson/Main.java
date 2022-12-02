@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        int[] data = {2, 4, 1, 5, 3, 6, 7};
+        int[] data = {3, 2, 4, 5, 1, 7, 6};
         List<HeapTreeNode> heap = new LinkedList<>();
 
         for (int i = 0; i < data.length; i++)
@@ -21,7 +21,10 @@ public class Main {
         }
 
         System.out.println("RANDOM: " + heap);
-        HeapTreeNode.buildMaxHeap(heap);
-        System.out.println("MAX: " + heap);
+        HeapTreeNode.buildMinHeap(heap);
+        System.out.println("MIN: " + heap);
+        HeapTreeNode.heapSortMin(heap);
+        System.out.println("SORTED: " + heap);
+
     }
 }
